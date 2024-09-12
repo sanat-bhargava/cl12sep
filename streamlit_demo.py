@@ -328,7 +328,12 @@ def store_manager_app():
             "What were the sales for each store during the 'autumn/winter' season last year for store with latest location ALA MOANA CENTER?":
                 {
                     "sql": "SELECT f.TransactionCountLY, d.LatestLocation FROM fact_Basket f  JOIN dim_Location_Latest d ON f.LocationLatestKey = d.LocationLatestKey JOIN dim_Calendar c ON f.CalendarKey = c.CalendarKey WHERE d.LatestLocation = 'Plzen Olympia' AND c.Season = 'autumn/winter' AND c.FiscalYear = YEAR(CURDATE()) - 1 ORDER BY f.TransactionCountLY DESC;",
-                    "nlr": "During the 'autumn/winter' season last year, the sales for the store located at ALA MOANA CENTER were as follows: one transaction count was 142, and another was 165",
+                    "nlr": "During the 'autumn/winter' season last year, the sales for the store located at Plzen Olympia were as follows: one transaction count was 26, and another was 22",
+                },
+            "What is the average number of units sold per transaction at the latest location of store ALA MOANA CENTER?":
+                {
+                    "sql": "SELECT AVG(f.TransactionCountTY) AS AverageUnitsSold FROM fact_Basket f JOIN dim_Location_Latest l ON f.LocationLatestKey = l.LocationLatestKey WHERE l.LatestLocation = 'Plzen Olympia'",
+                    "nlr": "The average number of units sold per transaction at the latest location of store Plzen Olympia is approximately 25.8647.",
                 },
 
 
@@ -354,10 +359,15 @@ def store_manager_app():
                     "sql": "SELECT f.TransactionCountLY, d.LatestLocation FROM fact_Basket f  JOIN dim_Location_Latest d ON f.LocationLatestKey = d.LocationLatestKey JOIN dim_Calendar c ON f.CalendarKey = c.CalendarKey WHERE d.LatestLocation = 'ALA MOANA CENTER' AND c.Season = 'autumn/winter' AND c.FiscalYear = YEAR(CURDATE()) - 1 ORDER BY f.TransactionCountLY DESC;",
                     "nlr": "During the 'autumn/winter' season last year, the sales for the store located at ALA MOANA CENTER were as follows: one transaction count was 142, and another was 165",
                 },
+            "What is the average number of units sold per transaction at the latest location of store ALA MOANA CENTER?":
+                {
+                    "sql": "SELECT AVG(f.TransactionCountTY) AS AverageUnitsSold FROM fact_Basket f JOIN dim_Location_Latest l ON f.LocationLatestKey = l.LocationLatestKey WHERE l.LatestLocation = 'ALA MOANA CENTER'",
+                    "nlr": "The average number of units sold per transaction at the latest location of store ALA MOANA CENTER is approximately 125.30.",
+                },
         },
     }
 
-    store_list = ["Store ID", "Plzen Olympia", "ALA MOANA CENTER", "S RONCQ"]
+    store_list = ["Store ID", "Plzen Olympia", "ALA MOANA CENTER"]
 
     dynamic_queries = get_queries_from_db()
 
@@ -400,8 +410,7 @@ def store_manager_app():
     if selected_store != "Store ID":
         store_name = {
             "Plzen Olympia": "Plzen Olympia",
-            "ALA MOANA CENTER": "ALA MOANA CENTER",
-            "S RONCQ": "S RONCQ"
+            "ALA MOANA CENTER": "ALA MOANA CENTER"
         }.get(selected_store, "")
 
         store_name_id_placeholder.markdown(f"""
