@@ -409,8 +409,8 @@ def store_manager_app():
 
     if selected_store != "Store ID":
         store_name = {
-            "Store 1": "Plzen Olympia",
-            "Store 2": "ALA MOANA CENTER"
+            "Plzen Olympia": "",
+            "ALA MOANA CENTER": ""
         }.get(selected_store, "")
 
         store_name_id_placeholder.markdown(f"""
