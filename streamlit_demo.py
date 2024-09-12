@@ -409,13 +409,13 @@ def store_manager_app():
 
     if selected_store != "Store ID":
         store_name = {
-            "Plzen Olympia": "",
-            "ALA MOANA CENTER": ""
+            "Plzen Olympia": "Plzen Olympia",
+            "ALA MOANA CENTER": "ALA MOANA CENTER"
         }.get(selected_store, "")
 
         store_name_id_placeholder.markdown(f"""
         <h4 style="background-color: {CLAIRE_MAUVE}; color: black; padding: 10px;">
-            {store_name}, {selected_store}
+            {store_name}
         </h4>
         """, unsafe_allow_html=True)
 
